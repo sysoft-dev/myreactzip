@@ -13,3 +13,10 @@ jobs:
         uses: actions/setup-node@v4
       - name: Run "npm install"
         run: npm install
+  job2:
+    depends-on: job1
+      steps: 
+      - name: Adding actions/checkout@v4 from marketplace
+        uses: actions/checkout@v4
+      - name: Run "npm test"
+        run: npm test
