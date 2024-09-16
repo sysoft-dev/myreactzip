@@ -19,5 +19,7 @@ jobs:
     steps: 
       - name: Adding actions/checkout@v4 from marketplace
         uses: actions/checkout@v4
+      - name: Run "npm install"
+        run: npm install
       - name: Run "npm test"
         run: npm test
