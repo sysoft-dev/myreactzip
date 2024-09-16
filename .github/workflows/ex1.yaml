@@ -10,4 +10,4 @@ jobs:
       - name: Adding actions/checkout@v4 from marketplace
         uses: actions/checkout@v4
       - name: Adding Node.js from marketplace
-      - uses: actions/setup-node@v4
+        uses: actions/setup-node@v4
