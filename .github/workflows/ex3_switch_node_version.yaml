@@ -8,23 +8,17 @@ jobs:
      issues: write
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch GITHUB token
-        id: github_token
-        run: echo "GITHUB_TOKEN=${{github.token}}" >> $GITHUB_OUTPUT
-      - name: Set GITHUB REPO
-        id: github_repo
-        run: echo "GITHUB_REPO=${{github.repository}}" >> $GITHUB_OUTPUT
       - name: set short_sha
         id: set_short_sha
         run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
       - name: create issue with GITHUB API
         run: |
                 curl --request POST \
-                  --url https://api.github.com/repos/${{ steps.github_repo.outputs.GITHUB_REPO }}/issues \
-                  --header 'authorization: Bearer ${{ steps.github_token.outputs.GITHUB_TOKEN }}' \
+                  --url https://api.github.com/repos/${{ ${{github.repository}} /issues \
+                  --header 'authorization: Bearer ${{github.token}}' \
                   --header 'content-type: application/json' \
                   --data '{
-                           "title": "Automated issue for commit: ${{ steps.short_sha.outputs.sha_short }}",
+                           "title": "Automated issue for commit: ${{ steps.short_sha.outputs.short_sha }}",
                            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ steps.set_short_sha.outputs.short_sha }}_."
                     }' \
                   --fail
