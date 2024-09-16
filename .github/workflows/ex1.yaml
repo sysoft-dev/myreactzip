@@ -5,7 +5,9 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    
+
     steps: 
       - name: Adding actions/checkout@v4 from marketplace
         uses: actions/checkout@v4
+      - name: Adding Node.js from marketplace
+      - uses: actions/setup-node@v4
