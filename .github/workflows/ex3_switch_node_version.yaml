@@ -3,7 +3,8 @@ on:
   pull_request:
 
 jobs:
-  permissions: [read, write]
+  permissions: 
+    actions: [ read, write ]
   create-issue:
     runs-on: ubuntu-latest
     steps:
