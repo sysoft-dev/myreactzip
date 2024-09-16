@@ -24,4 +24,6 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Run "npm install and test"
-        run: npm install && npm test
+        run: |
+              npm install  
+              npm test
