@@ -11,3 +11,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Adding Node.js from marketplace
         uses: actions/setup-node@v4
+      - name: Run "npm install"
+        run: npm install
