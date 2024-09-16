@@ -14,7 +14,7 @@ jobs:
       - name: Run "npm install"
         run: npm install
   job2:
-    depends-on: job1
+    need: job1
     steps: 
       - name: Adding actions/checkout@v4 from marketplace
         uses: actions/checkout@v4
