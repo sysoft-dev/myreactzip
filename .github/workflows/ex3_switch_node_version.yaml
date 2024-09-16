@@ -14,7 +14,7 @@ jobs:
       - name: Set GITHUB REPO
         id: github_repo
         run: echo "GITHUB_REPO=${{github.repository}}" >> $GITHUB_OUTPUT
-      - name: set shot_sha
+      - name: set short_sha
         id: set_short_sha
         run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
       - name: create issue with GITHUB API
@@ -25,6 +25,6 @@ jobs:
                   --header 'content-type: application/json' \
                   --data '{
                            "title": "Automated issue for commit: ${{ steps.short_sha.outputs.sha_short }}",
-                           "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ steps.short_sha.outputs.sha_short }}_."
+                           "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ steps.set_short_sha.outputs.sha_short }}_."
                     }' \
                   --fail
