@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Fetch GITHUB token
         id: github_token
-        run: echo "${{GITHUB.TOKEN}}" >> $GITHUB_OUTPUT
+        run: echo "GITHUB_TOKEN=${{GITHUB.TOKEN}}" >> $GITHUB_OUTPUT
 
       - name: create issue with GITHUB API
         run: |
