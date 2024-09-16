@@ -6,12 +6,15 @@ jobs:
   run-npm-test:
     runs-on: ubuntu-latest
     steps:
+        - name: set Node version
+          id: node_version
+          run: echo "NODE_VERSION=15" >> $GITHUB_OUTPUT
         - name: checkout
           uses: actions/checkout@v3
         - name : setup node
           uses: actions/setup-node@v3
           with:
-            node-version: 'lts/*'
+            node-version: '${{ steps.node_version.outputs.NODE_VERSION}}'
         - name: run test
           shell: bash
           run: |
