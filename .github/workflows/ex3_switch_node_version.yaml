@@ -8,14 +8,17 @@ jobs:
     steps:
       - name: Fetch GITHUB token
         id: github_token
-        run: echo "GITHUB_TOKEN=${{GITHUB.TOKEN}}" >> $GITHUB_OUTPUT
+        run: echo "GITHUB_TOKEN=${{github.token}}" >> $GITHUB_OUTPUT
+      - name: Set GITHUB REPO
+        id: github_repo
+        run: echo "GITHUB_REPO=${{github.repository}}" >> $GITHUB_OUTPUT
       - name: set shot_sha
         id: set_short_sha
         run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
       - name: create issue with GITHUB API
         run: |
                 curl --request POST \
-                  --url https://api.github.com/repos/<specify your repo with github context>/issues \
+                  --url https://api.github.com/repos/${{ steps.github_repo.outputs.GITHUB_REPO }}/issues \
                   --header 'authorization: Bearer ${{ steps.github_token.outputs.GITHUB_TOKEN }}' \
                   --header 'content-type: application/json' \
                   --data '{
