@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   call-workflow-ex4:
-    uses: ./.github/workflows/ex4.yml@main
+    uses: ./.github/workflows/ex4.yml
     with:
       node-version: "lts/*"
     
