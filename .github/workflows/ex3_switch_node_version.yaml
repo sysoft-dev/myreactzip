@@ -13,7 +13,8 @@ jobs:
         id: set_short_sha
         run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
       - name: create issue with GITHUB API
-        run: curl --request POST \
+        run: |
+                curl --request POST \
                   --url https://api.github.com/repos/<specify your repo with github context>/issues \
                   --header 'authorization: Bearer ${{ steps.github_token.outputs.GITHUB_TOKEN }}' \
                   --header 'content-type: application/json' \
