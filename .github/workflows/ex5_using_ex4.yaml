@@ -5,5 +5,5 @@ jobs:
   call-workflow-ex4:
     uses: ./.github/workflows/ex4.yaml
     with:
-      node-version: "lts/*"
+      node-version: 14
     
