@@ -1,19 +1,24 @@
-name: Switch Node version
+name: interact with Github API
 on: 
   pull_request:
 
 jobs:
-  run-npm-test:
+  create-issue:
+    permissions: 
+     issues: write
     runs-on: ubuntu-latest
     steps:
-        - name: checkout
-          uses: actions/checkout@v3
-        - name : setup node
-          uses: actions/setup-node@v3
-          with:
-            node-version: 'lts/*'
-        - name: run test
-          shell: bash
-          run: |
-            npm install
-            npm test
+      - name: set short_sha
+        id: set_short_sha
+        run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      - name: create issue with GITHUB API
+        run: |
+                curl --request POST \
+                  --url https://api.github.com/repos/${{github.repository}}/issues \
+                  --header 'authorization: Bearer ${{secrets.MY_TOKEN}}' \
+                  --header 'content-type: application/json' \
+                  --data '{
+                           "title": "Automated issue for commit: ${{ steps.set_short_sha.outputs.short_sha }}",
+                           "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ steps.set_short_sha.outputs.short_sha }}_."
+                    }' \
+                  --fail
